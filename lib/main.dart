@@ -18,6 +18,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:mark_jinxiaoman/app/bindings/global_binding.dart';
 import 'package:mark_jinxiaoman/app/data/app_data.dart';
 import 'package:mark_jinxiaoman/app/routes/app_pages.dart';
 import 'package:mark_jinxiaoman/app/ui/theme.dart';
@@ -26,6 +27,8 @@ import 'package:mark_jinxiaoman/app/utils/logger.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  GlobalBinding().dependencies();
+
   runInitApp(MyApp());
 }
 

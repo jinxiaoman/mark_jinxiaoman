@@ -13,3 +13,10 @@ class GlobalBinding extends Bindings {
   }
 }
 //   GlobalBinding().dependencies();  // 绑定全局控制器
+// 获取AppwriteService实例
+    // final AppwriteService appwriteService = Get.find<AppwriteService>();
+
+     // 获取全局状态控制器
+    // final GlobalState globalState = Get.find<GlobalState>();
+     // Get.find<GlobalController>().login('John Doe');
+
