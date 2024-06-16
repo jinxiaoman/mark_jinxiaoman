@@ -9,7 +9,7 @@ class CustomTheme {
   static final lightTheme = ThemeData(
     primaryColor: lightThemeColor,
     brightness: Brightness.light,
-    scaffoldBackgroundColor: white,
+    scaffoldBackgroundColor: Color(0xFFF2F2F3),
     useMaterial3: true,
     fontFamily: lightThemeFont,
     switchTheme: SwitchThemeData(

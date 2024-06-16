@@ -41,14 +41,14 @@ void main() {
 void _initializeApp() async {
   await AppData.initData();
   await Future.delayed(Duration(seconds: 2)); // 模拟启动屏幕停留时间
-
-  if (AppData.isFirstEntry()) {
-    Get.offAllNamed('/login'); // 第一次进入应用，跳转到登录页
-  } else if (AppData.isUserLoggedIn()) {
-    Get.offAllNamed('/home'); // 已登录，跳转到首页
-  } else {
-    Get.offAllNamed('/login'); // 未登录，跳转到登录页
-  }
+// 权限路由
+//   if (AppData.isFirstEntry()) {
+//     Get.offAllNamed('/login'); // 第一次进入应用，跳转到登录页
+//   } else if (AppData.isUserLoggedIn()) {
+//     Get.offAllNamed('/home'); // 已登录，跳转到首页
+//   } else {
+//     Get.offAllNamed('/login'); // 未登录，跳转到登录页
+//   }
 
   FlutterNativeSplash.remove();
 }
