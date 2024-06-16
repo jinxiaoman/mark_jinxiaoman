@@ -21,6 +21,17 @@ class AppwriteService {
     storage = Storage(client);
   }
 
+// 获取用户信息
+  Future<User> getUser() async {
+    try {
+      final user = await account.get();
+      return user;
+    } catch (e) {
+      throw Exception('Failed to get user: $e');
+    }
+  }
+
+  // 创建用户
   Future<User> createUser(String email, String password, String name) async {
     try {
       final user = await account.create(
@@ -35,7 +46,8 @@ class AppwriteService {
     }
   }
 
-  Future<Session> createSession(String email, String password) async {
+// 创建会话/登录
+  Future<Session> Login(String email, String password) async {
     try {
       final session = await account.createEmailPasswordSession(
         email: email,
@@ -47,7 +59,8 @@ class AppwriteService {
     }
   }
 
-  Future<void> deleteSession(String sessionId) async {
+// 删除会话/退出登录
+  Future<void> logout(String sessionId) async {
     try {
       await account.deleteSession(sessionId: sessionId);
     } catch (e) {

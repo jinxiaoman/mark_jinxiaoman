@@ -23,15 +23,15 @@ class AppData {
     return prefs?.getBool('IS_FIRST') ?? true;
   }
 
-//   // 保存登录状态
-//   static void saveLoginStatus(bool isLoggedIn) {
-//     prefs?.setBool(GlobalState.IS_LOGGED_IN, isLoggedIn);
-//   }
+  // 保存登录状态
+  static void saveLoginStatus(bool isLoggedIn) {
+    prefs?.setBool(GlobalState.IS_LOGGED_IN as String, isLoggedIn);
+  }
 
-//   // 查询登录状态
-//   static bool isUserLoggedIn() {
-//     return prefs?.getBool(GlobalState.IS_LOGGED_IN) ?? false;
-//   }
+  // 查询登录状态
+  static bool isUserLoggedIn() {
+    return prefs?.getBool(GlobalState.IS_LOGGED_IN as String) ?? false;
+  }
 
   // 保存Token
   static void saveToken(String token) {

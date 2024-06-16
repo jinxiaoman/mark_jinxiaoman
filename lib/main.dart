@@ -15,9 +15,11 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 import 'package:mark_jinxiaoman/app/bindings/global_binding.dart';
 import 'package:mark_jinxiaoman/app/data/app_data.dart';
 import 'package:mark_jinxiaoman/app/routes/app_pages.dart';
@@ -28,17 +30,27 @@ import 'package:mark_jinxiaoman/app/utils/logger.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   GlobalBinding().dependencies();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runApp(MyApp());
 
-  runInitApp(MyApp());
+  _initializeApp();
 }
 
 ///做一些初始化操作
-void runInitApp(Widget app) async {
-  ///初始化本地数据
+void _initializeApp() async {
   await AppData.initData();
-//   HttpService.doInit();
-  runApp(app);
-  AppLogger.i("应用启动");
+  await Future.delayed(Duration(seconds: 2)); // 模拟启动屏幕停留时间
+
+  if (AppData.isFirstEntry()) {
+    Get.offAllNamed('/login'); // 第一次进入应用，跳转到登录页
+  } else if (AppData.isUserLoggedIn()) {
+    Get.offAllNamed('/home'); // 已登录，跳转到首页
+  } else {
+    Get.offAllNamed('/login'); // 未登录，跳转到登录页
+  }
+
+  FlutterNativeSplash.remove();
 }
 
 // ignore: must_be_immutable

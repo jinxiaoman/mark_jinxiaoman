@@ -6,10 +6,10 @@ class GlobalController extends GetxController {
   GlobalState globalState = Get.find<GlobalState>();
 
   void login(String name) {
-    globalState.IS_LOGGED_IN.value = true;
+    GlobalState.IS_LOGGED_IN = true;
   }
 
   void logout() {
-    globalState.IS_LOGGED_IN.value = false;
+    GlobalState.IS_LOGGED_IN = false;
   }
 }

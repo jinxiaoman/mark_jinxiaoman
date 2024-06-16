@@ -2,7 +2,6 @@
 import 'package:get/get.dart';
 
 class GlobalState extends GetxController {
-  var IS_LOGGED_IN = false.obs;
   var IS_NEW_USER = false.obs;
   var USER_NAME = ''.obs;
   var TAB_BAR_SELECTED_INDEX = 0.obs;
@@ -12,6 +11,7 @@ class GlobalState extends GetxController {
   static const String USER_INFO = "user_info";
   static const String LOCALE_INDEX = "locale_index";
   static const String THEME_MODE = "THEME_MODE";
+  static bool IS_LOGGED_IN = false;
 
   // Appwrite
   static const String appName = "Flutter Appwrite Starter";
