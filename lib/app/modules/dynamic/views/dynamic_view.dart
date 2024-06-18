@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:mark_jinxiaoman/app/ui/widgets/baseAppBar.dart';
+import 'package:mark_jinxiaoman/app/ui/widgets/baseWebView.dart';
+import 'package:mark_jinxiaoman/generated/locales.g.dart';
 
 import '../controllers/dynamic_controller.dart';
 
@@ -9,15 +12,13 @@ class DynamicView extends GetView<DynamicController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('DynamicView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'DynamicView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      //   appBar: BaseAppBar(
+      //     title: LocaleKeys.titles_settings.tr,
+      //     showLeftButton: false,
+      //   ),
+      body: BaseWebView(
+        title: '',
+        url: 'https://www.baidu.com',
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:mark_jinxiaoman/app/ui/widgets/baseAppBar.dart';
 import 'package:mark_jinxiaoman/app/utils/loading.dart';
 import 'package:mark_jinxiaoman/app/ui/widgets/MenuItem.dart';
 import 'package:mark_jinxiaoman/app/ui/widgets/MenuItemGroup.dart';
@@ -13,10 +14,9 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('个人'),
-        centerTitle: true,
-        backgroundColor: Color(0xFFF2F2F3),
+      appBar: BaseAppBar(
+        title: '个人',
+        showLeftButton: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

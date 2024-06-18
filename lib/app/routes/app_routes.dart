@@ -12,11 +12,11 @@ abstract class Routes {
   static const ABOUT = _Paths.ABOUT;
   static const DYNAMIC = _Paths.DYNAMIC;
   static const WEBVIEW = _Paths.WEBVIEW;
-  static const THEME = _Paths.SETTINGS + _Paths.THEME;
-  static const ACCOUNT = _Paths.SETTINGS + _Paths.ACCOUNT;
+  static const SETTINGS_THEME = _Paths.SETTINGS + _Paths.THEME;
+  static const SETTINGS_ACCOUNT = _Paths.SETTINGS + _Paths.ACCOUNT;
   static const POLICY = _Paths.POLICY;
-  static const USER = _Paths.POLICY + _Paths.USER;
-  static const PRIVACY = _Paths.POLICY + _Paths.PRIVACY;
+  static const POLICY_USER = _Paths.POLICY + _Paths.USER;
+  static const POLICY_PRIVACY = _Paths.POLICY + _Paths.PRIVACY;
 }
 
 abstract class _Paths {

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mark_jinxiaoman/app/modules/home/controllers/home_controller.dart';
+import 'package:mark_jinxiaoman/app/ui/widgets/baseAppBar.dart';
+import 'package:mark_jinxiaoman/generated/locales.g.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
+    // Get.put(HomeController()); 这里注销，因为在 TabbarBinding 中已经注册了 HomeController。正常情况下是已经注册了的，因为这个是子页面，通过路由进来会注册的。
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
+      appBar: BaseAppBar(
+        title: LocaleKeys.titles_home.tr,
+        showLeftButton: false,
       ),
       body: Center(
         child: Column(
