@@ -30,6 +30,7 @@ class _TabbarView extends State<TabbarView> {
         body: PageView(
           children: pages,
           controller: _pageController,
+          physics: NeverScrollableScrollPhysics(), // 禁止左右滑动切换
           onPageChanged: (index) {
             logic.selectedIndex.value = index;
           },

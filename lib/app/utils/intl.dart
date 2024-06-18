@@ -16,7 +16,7 @@ class Intl extends Translations {
 
   factory Intl() => getInstance();
 
-  var locales = [const Locale('zh', 'ZH'), const Locale('en', 'US')];
+  var locales = [const Locale('zh', 'CN'), const Locale('en', 'US')];
 
   String get connect => 'connect'.tr;
   String get getx_get => 'getx_get'.tr;

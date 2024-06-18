@@ -10,6 +10,7 @@ class AppwriteService {
   late Account account;
   late Avatars avatars;
   late Storage storage;
+  late Databases databases;
 
   AppwriteService() {
     client = Client()
@@ -19,6 +20,7 @@ class AppwriteService {
     account = Account(client);
     avatars = Avatars(client);
     storage = Storage(client);
+    databases = Databases(client);
   }
 
 // 获取用户信息
@@ -88,5 +90,62 @@ class AppwriteService {
       fileId: ID.unique(),
       file: file,
     );
+  }
+
+  // 数据库操作
+  // 获取所有文档
+  Future<List<Document>> getDocuments(String collectionId) async {
+    try {
+      final response = await databases.listDocuments(
+          databaseId: GlobalState.databaseId, collectionId: collectionId);
+      return response.documents;
+    } catch (e) {
+      throw Exception('Failed to get documents: $e');
+    }
+  }
+
+  // 创建文档
+  Future<Document> createDocument(
+      String collectionId, Map<String, dynamic> data) async {
+    try {
+      final response = await databases.createDocument(
+        databaseId: GlobalState.databaseId,
+        collectionId: collectionId,
+        documentId: 'unique()', // 自动生成唯一ID
+        data: data,
+      );
+      return response;
+    } catch (e) {
+      throw Exception('Failed to create document: $e');
+    }
+  }
+
+  // 更新文档
+  Future<Document> updateDocument(
+      String collectionId, String documentId, Map<String, dynamic> data) async {
+    try {
+      final response = await databases.updateDocument(
+        databaseId: GlobalState.databaseId,
+        collectionId: collectionId,
+        documentId: documentId,
+        data: data,
+      );
+      return response;
+    } catch (e) {
+      throw Exception('Failed to update document: $e');
+    }
+  }
+
+  // 删除文档
+  Future<void> deleteDocument(String collectionId, String documentId) async {
+    try {
+      await databases.deleteDocument(
+        databaseId: GlobalState.databaseId,
+        collectionId: collectionId,
+        documentId: documentId,
+      );
+    } catch (e) {
+      throw Exception('Failed to delete document: $e');
+    }
   }
 }

@@ -22,10 +22,13 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:mark_jinxiaoman/app/bindings/global_binding.dart';
 import 'package:mark_jinxiaoman/app/data/app_data.dart';
+import 'package:mark_jinxiaoman/app/data/loading_service.dart';
+import 'package:mark_jinxiaoman/app/data/toast_service.dart';
 import 'package:mark_jinxiaoman/app/routes/app_pages.dart';
 import 'package:mark_jinxiaoman/app/ui/theme.dart';
 import 'package:mark_jinxiaoman/app/utils/intl.dart';
 import 'package:mark_jinxiaoman/app/utils/logger.dart';
+import 'package:oktoast/oktoast.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +36,6 @@ void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
-
   _initializeApp();
 }
 
@@ -68,44 +70,48 @@ class MyApp extends StatelessWidget {
     ThemeMode themeMode = AppData.getThemeMode();
     AppLogger.i("缓存中的国际化语言索引--,${Intl().locales[localeIndex]}");
     AppLogger.i("缓存中的themeMode--,${themeMode}");
-
     return ScreenUtilInit(
-        //填入设计稿中设备的屏幕尺寸,单位dp
-        designSize: Size(375, 690),
-        builder: (context, child) => GetMaterialApp(
-              translations: Intl(),
-              enableLog: true,
-              theme: CustomTheme.lightTheme,
-              darkTheme: CustomTheme.darkTheme,
-              themeMode: themeMode,
-              initialRoute: AppPages.INITIAL,
-              getPages: AppPages.routes,
-              locale: Intl().locales[localeIndex],
-              fallbackLocale: Intl().locales[localeIndex],
+        designSize: Size(375, 690), // 填入设计稿中设备的屏幕尺寸，单位dp
+        builder: (context, child) {
+          return OKToast(
+              child: GetMaterialApp(
+            translations: Intl(),
+            enableLog: true,
+            theme: CustomTheme.lightTheme,
+            darkTheme: CustomTheme.darkTheme,
+            themeMode: themeMode,
+            initialRoute: AppPages.INITIAL,
+            getPages: AppPages.routes,
+            locale: Intl().locales[localeIndex],
+            fallbackLocale: Intl().locales[localeIndex],
 
-              ///添加一个默认语言选项，以备上面指定的语言翻译 不存在
-              supportedLocales: Intl().locales,
-              localizationsDelegates: [
-                // S.delegate,
-                GlobalMaterialLocalizations.delegate,
+            ///添加一个默认语言选项，以备上面指定的语言翻译 不存在
+            supportedLocales: Intl().locales,
+            localizationsDelegates: [
+              // S.delegate,
+              GlobalMaterialLocalizations.delegate,
 
-                /// 指定本地化的字符串和一些其他的值
-                GlobalCupertinoLocalizations.delegate,
+              /// 指定本地化的字符串和一些其他的值
+              GlobalCupertinoLocalizations.delegate,
 
-                /// 对应的Cupertino风格
-                GlobalWidgetsLocalizations.delegate,
+              /// 对应的Cupertino风格
+              GlobalWidgetsLocalizations.delegate,
 
-                /// 指定默认的文本排列方向, 由左到右或由右到左
-              ],
-              //   themeMode: ThemeMode.dark, // 设置主题模式
-              builder: (context, widget) {
-                return MediaQuery(
+              /// 指定默认的文本排列方向, 由左到右或由右到左
+            ],
+            //   themeMode: ThemeMode.dark, // 设置主题模式
+            builder: (context, widget) {
+              Get.find<ToastService>().init(context);
+              Get.find<LoadingService>().init(context);
 
-                    ///设置文字大小不随系统设置改变
-                    data: MediaQuery.of(context)
-                        .copyWith(textScaler: TextScaler.linear(1.0)),
-                    child: widget ?? Container());
-              },
-            ));
+              return MediaQuery(
+
+                  ///设置文字大小不随系统设置改变
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: TextScaler.linear(1.0)),
+                  child: widget ?? Container());
+            },
+          ));
+        });
   }
 }

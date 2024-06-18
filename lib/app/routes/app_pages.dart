@@ -8,11 +8,21 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/policy/bindings/policy_binding.dart';
+import '../modules/policy/views/policy_view.dart';
+import '../modules/policy/modules/privacy/bindings/privacy_binding.dart';
+import '../modules/policy/modules/privacy/views/privacy_view.dart';
+import '../modules/policy/modules/user/bindings/user_binding.dart';
+import '../modules/policy/modules/user/views/user_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/settings/modules/account/bindings/account_binding.dart';
+import '../modules/settings/modules/account/views/account_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
+import '../modules/settings/modules/theme/bindings/theme_binding.dart';
+import '../modules/settings/modules/theme/views/theme_view.dart';
 import '../modules/settings/views/settings_view.dart';
 import '../modules/tabbar/bindings/tabbar_binding.dart';
 import '../modules/tabbar/views/tabbar_view.dart';
@@ -56,6 +66,18 @@ class AppPages {
       name: _Paths.SETTINGS,
       page: () => const SettingsView(),
       binding: SettingsBinding(),
+      children: [
+        GetPage(
+          name: _Paths.THEME,
+          page: () => const ThemeView(),
+          binding: ThemeBinding(),
+        ),
+        GetPage(
+          name: _Paths.ACCOUNT,
+          page: () => const AccountView(),
+          binding: AccountBinding(),
+        ),
+      ],
     ),
     GetPage(
       name: _Paths.ABOUT,
@@ -71,6 +93,23 @@ class AppPages {
       name: _Paths.WEBVIEW,
       page: () => const WebviewView(),
       binding: WebviewBinding(),
+    ),
+    GetPage(
+      name: _Paths.POLICY,
+      page: () => const PolicyView(),
+      binding: PolicyBinding(),
+      children: [
+        GetPage(
+          name: _Paths.USER,
+          page: () => const UserView(),
+          binding: UserBinding(),
+        ),
+        GetPage(
+          name: _Paths.PRIVACY,
+          page: () => const PrivacyView(),
+          binding: PrivacyBinding(),
+        ),
+      ],
     ),
   ];
 }

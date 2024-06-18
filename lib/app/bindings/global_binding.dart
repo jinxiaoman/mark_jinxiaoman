@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:mark_jinxiaoman/app/controllers/global_controller.dart';
 import 'package:mark_jinxiaoman/app/data/appwrite_service.dart';
 import 'package:mark_jinxiaoman/app/data/global_state.dart';
+import 'package:mark_jinxiaoman/app/data/loading_service.dart';
+import 'package:mark_jinxiaoman/app/data/toast_service.dart';
 
 class GlobalBinding extends Bindings {
   @override
@@ -10,6 +12,8 @@ class GlobalBinding extends Bindings {
     Get.put(GlobalState());
     Get.put(GlobalController());
     Get.put(AppwriteService());
+    Get.put(ToastService()); // 注册 ToastService
+    Get.put(LoadingService()); // 注册 LoadingService
   }
 }
 //   GlobalBinding().dependencies();  // 绑定全局控制器

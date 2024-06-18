@@ -74,16 +74,22 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: backgroundColor,
+    return Material(
+      color: backgroundColor,
+      borderRadius: borderRadius,
+      child: InkWell(
         borderRadius: borderRadius,
-      ),
-      child: ListTile(
-        leading: Icon(icon),
-        title: Text(text),
-        trailing: trailing,
         onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: borderRadius,
+          ),
+          child: ListTile(
+            leading: Icon(icon),
+            title: Text(text),
+            trailing: trailing,
+          ),
+        ),
       ),
     );
   }

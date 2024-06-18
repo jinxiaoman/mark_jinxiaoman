@@ -24,6 +24,7 @@ class SettingsView extends GetView<SettingsController> {
                 // Navigate to account and security settings
               },
             ),
+            MenuItem(icon: Icons.settings_sharp, text: '主题设置', onTap: () {}),
             MenuItem(
               icon: Icons.privacy_tip,
               text: '隐私设置',
