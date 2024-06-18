@@ -36,15 +36,4 @@ class TabbarController extends GetxController {
       }
     });
   }
-
-  changeLanguage() {
-    var locale = Get.locale;
-    if (locale?.languageCode == 'cn') {
-      AppData.saveLocaleIndex(1);
-      Get.updateLocale(Locale('en', 'EN'));
-    } else {
-      AppData.saveLocaleIndex(0);
-      Get.updateLocale(Locale('cn', 'ZH'));
-    }
-  }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mark_jinxiaoman/app/data/global_state.dart';
 import 'package:mark_jinxiaoman/app/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -80,13 +81,17 @@ class AppData {
     }
   }
 
-  // 保存国际化语言索引
-  static void saveLocaleIndex(int index) {
-    prefs?.setInt(GlobalState.LOCALE_INDEX, index);
+  // 切换国际化语言
+  static void changeLanguage(Locale locale) async {
+    Get.updateLocale(locale);
+    await prefs?.setString(
+        'locale', '${locale.languageCode}_${locale.countryCode}');
   }
+  // 示例 AppData.changeLanguage(Locale('zh', 'CN'));
 
-  // 查询国际化语言索引
-  static int queryLocaleIndex() {
-    return prefs?.getInt(GlobalState.LOCALE_INDEX) ?? 0;
+  // 查询国际化语言
+  static Future<Locale> getCurrentLocale() async {
+    String localeCode = prefs?.getString('locale') ?? 'zh_CN';
+    return Locale(localeCode.split('_')[0], localeCode.split('_')[1]);
   }
 }

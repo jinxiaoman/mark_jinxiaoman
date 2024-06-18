@@ -1,0 +1,56 @@
+{
+  "buttons": {
+    "login": "登录",
+    "sign_in": "注册",
+    "logout": "注销",
+    "sign_in_fb": "用 Facebook 登录",
+    "sign_in_google": "用 Google 登录",
+    "sign_in_apple": "用 Apple 登录",
+    "submit": "提交",
+    "cancel": "取消",
+    "ok": "确定",
+    "yes": "是",
+    "no": "否",
+    "retry": "重试"
+  },
+  "tabbar": {
+    "home": "首页",
+    "setting": "设置",
+    "profile": "个人"
+  },
+  "titles": {
+    "home": "首页",
+    "settings": "设置",
+    "profile": "个人资料",
+    "notifications": "通知",
+    "about": "关于我们",
+    "contact_us": "联系我们",
+    "terms_of_service": "服务条款",
+    "privacy_policy": "隐私政策"
+  },
+  "messages": {
+    "welcome": "欢迎",
+    "loading": "加载中...",
+    "error": "发生错误",
+    "no_data": "没有数据",
+    "network_error": "网络错误",
+    "success": "操作成功",
+    "warning": "警告",
+    "info": "信息",
+    "logout_confirm": "你确定要注销吗？"
+  },
+  "placeholders": {
+    "username": "用户名",
+    "password": "密码",
+    "email": "电子邮件",
+    "search": "搜索",
+    "enter_text": "请输入文本"
+  },
+  "errors": {
+    "required_field": "这是必填字段",
+    "invalid_email": "无效的电子邮件地址",
+    "short_password": "密码太短",
+    "password_mismatch": "密码不匹配",
+    "network_error": "网络连接失败，请检查你的网络设置"
+  }
+}

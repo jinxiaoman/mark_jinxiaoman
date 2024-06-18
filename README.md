@@ -91,6 +91,10 @@ dependencies:
     ```bash
     flutter run
     ```
+4. 国际化文件：
+  ```
+  get generate locales assets/locales
+  ```
 
 ## 目录结构说明
 - `app`: 项目主目录
