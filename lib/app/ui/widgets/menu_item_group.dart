@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mark_jinxiaoman/app/ui/widgets/MenuItem.dart';
+import 'package:mark_jinxiaoman/app/ui/widgets/menu_item.dart';
 
 class MenuItemGroup extends StatelessWidget {
   final List<MenuItem> items;

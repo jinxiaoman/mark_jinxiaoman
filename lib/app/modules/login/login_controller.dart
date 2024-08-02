@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mark_jinxiaoman/config/app_config.dart';
 
 class LoginController extends GetxController {
   //TODO: Implement LoginController
@@ -37,8 +38,9 @@ class LoginController extends GetxController {
       // 登录成功的处理
       isLoggedIn.value = true;
       isLoading.value = false;
+      AppConfig.to.isLoggedIn = true;
       // get 跳转首页
-      Get.offAllNamed('/webview');
+      Get.offAllNamed('/tabbar');
     } catch (e) {
       // 登录失败的处理
       print('Login failed: $e');

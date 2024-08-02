@@ -1,83 +1,84 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 
-import 'package:mark_jinxiaoman/config/env.dart';
+class AppConfig extends GetxController {
+  static AppConfig get to => Get.find();
 
-// config/app_config.dart
+  final _box = GetStorage();
 
-class AppConfig {
-  static SharedPreferences? _prefs;
+  // API Related
+  final String baseUrl = 'https://www.baidu.com/';
 
-  static Future<bool> init() async {
-    _prefs = await SharedPreferences.getInstance();
-    return _prefs != null;
-  }
+  // Localization
+  final List<Locale> supportedLocales = const [
+    Locale('en', 'US'),
+    Locale('zh', 'CN'),
+  ];
+  final Locale fallbackLocale = const Locale('en', 'US');
 
-  static void saveFirstEntry() {
-    _prefs?.setBool(Env.isFirstEntry, false);
-  }
+  // Design
+  final Size designSize = const Size(375, 690);
 
-  static bool isFirstEntry() {
-    return _prefs?.getBool(Env.isFirstEntry) ?? true;
-  }
+  // Getters and Setters for dynamic values
+  bool get isFirstEntry => _box.read('isFirstEntry') ?? true;
+  set isFirstEntry(bool value) => _box.write('isFirstEntry', value);
 
-  static void saveLoginStatus(bool isLoggedIn) {
-    _prefs?.setBool(Env.isLoggedIn, isLoggedIn);
-  }
+  bool get isLoggedIn => _box.read('isLoggedIn') ?? false;
+  set isLoggedIn(bool value) => _box.write('isLoggedIn', value);
 
-  static bool isUserLoggedIn() {
-    return _prefs?.getBool(Env.isLoggedIn) ?? false;
-  }
+  String? get token => _box.read('token');
+  set token(String? value) => _box.write('token', value);
 
-  static void saveToken(String token) {
-    _prefs?.setString(Env.token, token);
-  }
+  Map<String, dynamic>? get userInfo => _box.read('userInfo');
+  set userInfo(Map<String, dynamic>? value) => _box.write('userInfo', value);
 
-  static String? getToken() {
-    return _prefs?.getString(Env.token);
-  }
-
-  static void saveUserInfo(Map<String, dynamic> userInfo) {
-    _prefs?.setString(Env.userInfo, userInfo.toString());
-  }
-
-  static Map<String, dynamic>? getUserInfo() {
-    String? userInfoString = _prefs?.getString(Env.userInfo);
-    return userInfoString != null
-        ? Map<String, dynamic>.from(jsonDecode(userInfoString))
-        : null;
-  }
-
-  static void saveThemeMode(ThemeMode themeMode) {
-    _prefs?.setString(Env.themeMode, themeMode.toString());
-  }
-
-  static ThemeMode getThemeMode() {
-    String? themeModeString = _prefs?.getString(Env.themeMode);
-    switch (themeModeString) {
-      case "ThemeMode.dark":
+  ThemeMode get themeMode {
+    String? mode = _box.read('themeMode');
+    switch (mode) {
+      case 'dark':
         return ThemeMode.dark;
-      case "ThemeMode.light":
+      case 'light':
         return ThemeMode.light;
-      case "ThemeMode.system":
-        return ThemeMode.system;
       default:
-        return ThemeMode.light;
+        return ThemeMode.system;
     }
   }
 
-  static void changeLanguage(Locale locale) async {
-    Get.updateLocale(locale);
-    await _prefs?.setString(
-        'locale', '${locale.languageCode}_${locale.countryCode}');
+  set themeMode(ThemeMode mode) =>
+      _box.write('themeMode', mode.toString().split('.').last);
+
+  Locale get currentLocale {
+    String? localeString = _box.read('locale');
+    if (localeString != null) {
+      List<String> parts = localeString.split('_');
+      return Locale(parts[0], parts[1]);
+    }
+    return fallbackLocale;
   }
 
-  static Future<Locale> getCurrentLocale() async {
-    String localeCode = _prefs?.getString('locale') ?? 'zh_CN';
-    return Locale(localeCode.split('_')[0], localeCode.split('_')[1]);
+  set currentLocale(Locale locale) {
+    _box.write('locale', '${locale.languageCode}_${locale.countryCode}');
+    Get.updateLocale(locale);
+  }
+
+  // Initialize the config
+  Future<void> init() async {
+    await GetStorage.init();
+    // You can set default values here if needed
+    if (!_box.hasData('isFirstEntry')) {
+      isFirstEntry = true;
+    }
+  }
+
+  // Method to reset all stored data (useful for logout)
+  void resetAll() {
+    _box.erase();
+    isFirstEntry = true;
+    isLoggedIn = false;
+    token = null;
+    userInfo = null;
+    themeMode = ThemeMode.system;
+    currentLocale = fallbackLocale;
   }
 }

@@ -33,8 +33,8 @@ class HomeController extends GetxController {
     print(value);
     isSwitched.value = value;
     value
-        ? AppData.changeLanguage(Locale('zh', 'CN'))
-        : AppData.changeLanguage(Locale('en', 'US'));
+        ? AppConfig.to.currentLocale = Locale('zh', 'CN')
+        : AppConfig.to.currentLocale = Locale('en', 'US');
   }
 
   void changeTheme() {
@@ -42,6 +42,6 @@ class HomeController extends GetxController {
         ? ThemeMode.light
         : ThemeMode.dark;
     Get.changeThemeMode(newThemeMode);
-    AppData.saveThemeMode(newThemeMode);
+    AppConfig.to.themeMode = newThemeMode;
   }
 }

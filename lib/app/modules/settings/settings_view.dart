@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:mark_jinxiaoman/app/ui/widgets/MenuItem.dart';
-
+import 'package:mark_jinxiaoman/app/ui/widgets/menu_item.dart';
 import 'settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {

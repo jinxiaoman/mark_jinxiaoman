@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 
-import 'package:mark_jinxiaoman/app/bindings/global_binding.dart';
 import 'package:mark_jinxiaoman/app/routes/app_pages.dart';
 import 'package:mark_jinxiaoman/app/services/loading_service.dart';
 import 'package:mark_jinxiaoman/app/services/toast_service.dart';
@@ -15,14 +13,10 @@ import 'package:mark_jinxiaoman/app/ui/theme/dark_theme.dart';
 import 'package:mark_jinxiaoman/app/ui/theme/light_theme.dart';
 import 'package:mark_jinxiaoman/app/utils/logger.dart';
 import 'package:mark_jinxiaoman/config/app_config.dart';
-import 'package:mark_jinxiaoman/config/env.dart';
 import 'package:mark_jinxiaoman/generated/locales.g.dart';
-
-// main.dart (updated)
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  GlobalBinding().dependencies();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await _initializeApp();
@@ -31,11 +25,16 @@ void main() async {
 }
 
 Future<void> _initializeApp() async {
-  await AppConfig.init();
-  final locale = await AppConfig.getCurrentLocale();
-  final themeMode = AppConfig.getThemeMode();
+  final appConfig = AppConfig();
+  await appConfig.init();
+  Get.put(appConfig);
+  Get.put(ToastService()); // 注册 ToastService
+  Get.put(LoadingService()); // 注册 LoadingService
 
-  await Future.delayed(Duration(seconds: 1));
+  final locale = appConfig.currentLocale;
+  final themeMode = appConfig.themeMode;
+
+  // await Future.delayed(Duration(seconds: 1));//模拟初始化数据
 
   runApp(MyApp(locale: locale, themeMode: themeMode));
 }
@@ -57,7 +56,7 @@ class MyApp extends StatelessWidget {
     AppLogger.i("缓存中的themeMode--,$themeMode");
 
     return ScreenUtilInit(
-      designSize: Env.designSize,
+      designSize: Get.find<AppConfig>().designSize,
       builder: (context, child) {
         return OKToast(
           child: GetMaterialApp(
@@ -69,8 +68,8 @@ class MyApp extends StatelessWidget {
             getPages: AppPages.routes,
             translationsKeys: AppTranslation.translations,
             locale: locale,
-            fallbackLocale: Env.fallbackLocale,
-            supportedLocales: Env.supportedLocales,
+            fallbackLocale: Get.find<AppConfig>().fallbackLocale,
+            supportedLocales: Get.find<AppConfig>().supportedLocales,
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
