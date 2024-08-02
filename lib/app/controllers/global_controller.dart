@@ -1,6 +1,8 @@
-// lib/app/controllers/global_controller.dart
 import 'package:get/get.dart';
+
 import 'package:mark_jinxiaoman/app/data/global_state.dart';
+
+// lib/app/controllers/global_controller.dart
 
 class GlobalController extends GetxController {
   GlobalState globalState = Get.find<GlobalState>();

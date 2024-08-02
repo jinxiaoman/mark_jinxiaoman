@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
 /// 自定义的通用AppBar组件，提供灵活的配置选项

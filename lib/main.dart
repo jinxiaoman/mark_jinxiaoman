@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:oktoast/oktoast.dart';
+
 import 'package:mark_jinxiaoman/app/bindings/global_binding.dart';
 import 'package:mark_jinxiaoman/app/data/app_data.dart';
 import 'package:mark_jinxiaoman/app/data/loading_service.dart';
@@ -12,7 +15,6 @@ import 'package:mark_jinxiaoman/app/routes/app_pages.dart';
 import 'package:mark_jinxiaoman/app/ui/theme.dart';
 import 'package:mark_jinxiaoman/app/utils/logger.dart';
 import 'package:mark_jinxiaoman/generated/locales.g.dart';
-import 'package:oktoast/oktoast.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding =

@@ -22,7 +22,6 @@ dependencies:
   path_provider: ^2.1.2
   cupertino_icons: ^1.0.5
   logger: ^2.3.0
-  appwrite: ^12.0.4
   flutter_native_splash: 2.4.0
   oktoast: 3.4.0
   flutter: 
@@ -63,3 +62,5 @@ flutter_native_splash:
   ios: true
   web: false
 
+get_cli:
+    sub_folder: false

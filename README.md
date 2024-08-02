@@ -10,43 +10,88 @@
 │   │   └── global_controller.dart
 │   ├── data
 │   │   ├── app_data.dart
-│   │   ├── appwrite_service.dart
-│   │   └── global_state.dart
+│   │   ├── global_state.dart
+│   │   ├── loading_service.dart
+│   │   └── toast_service.dart
 │   ├── modules
 │   │   ├── about
-│   │   │   ├── bindings
-│   │   │   │   └── about_binding.dart
-│   │   │   ├── controllers
-│   │   │   │   └── about_controller.dart
-│   │   │   └── views
-│   │   │       └── about_view.dart
+│   │   │   ├── about_binding.dart
+│   │   │   ├── about_controller.dart
+│   │   │   └── about_view.dart
+│   │   ├── dynamic
+│   │   │   ├── dynamic_binding.dart
+│   │   │   ├── dynamic_controller.dart
+│   │   │   └── dynamic_view.dart
 │   │   ├── home
-│   │   │   ├── bindings
-│   │   │   │   └── home_binding.dart
-│   │   │   ├── controllers
-│   │   │   │   └── home_controller.dart
-│   │   │   └── views
-│   │   │       └── home_view.dart
+│   │   │   ├── home_binding.dart
+│   │   │   ├── home_controller.dart
+│   │   │   └── home_view.dart
 │   │   ├── login
-│   │   │   ├── bindings
-│   │   │   │   └── login_binding.dart
-│   │   │   ├── controllers
-│   │   │   │   └── login_controller.dart
-│   │   │   └── views
-│   │   │       └── login_view.dart
+│   │   │   ├── login_binding.dart
+│   │   │   ├── login_controller.dart
+│   │   │   └── login_view.dart
+│   │   ├── policy
+│   │   │   ├── modules
+│   │   │   │   ├── privacy
+│   │   │   │   │   ├── privacy_binding.dart
+│   │   │   │   │   ├── privacy_controller.dart
+│   │   │   │   │   └── privacy_view.dart
+│   │   │   │   └── user
+│   │   │   │       ├── user_binding.dart
+│   │   │   │       ├── user_controller.dart
+│   │   │   │       └── user_view.dart
+│   │   │   ├── policy_binding.dart
+│   │   │   ├── policy_controller.dart
+│   │   │   └── policy_view.dart
+│   │   ├── profile
+│   │   │   ├── profile_binding.dart
+│   │   │   ├── profile_controller.dart
+│   │   │   └── profile_view.dart
+│   │   ├── register
+│   │   │   ├── register_binding.dart
+│   │   │   ├── register_controller.dart
+│   │   │   └── register_view.dart
+│   │   ├── settings
+│   │   │   ├── modules
+│   │   │   │   ├── account
+│   │   │   │   │   ├── account_binding.dart
+│   │   │   │   │   ├── account_controller.dart
+│   │   │   │   │   └── account_view.dart
+│   │   │   │   └── theme
+│   │   │   │       ├── theme_binding.dart
+│   │   │   │       ├── theme_controller.dart
+│   │   │   │       └── theme_view.dart
+│   │   │   ├── settings_binding.dart
+│   │   │   ├── settings_controller.dart
+│   │   │   └── settings_view.dart
+│   │   ├── tabbar
+│   │   │   ├── tabbar_binding.dart
+│   │   │   ├── tabbar_controller.dart
+│   │   │   └── tabbar_view.dart
+│   │   └── webview
+│   │       ├── webview_binding.dart
+│   │       ├── webview_controller.dart
+│   │       └── webview_view.dart
 │   ├── routes
 │   │   ├── app_pages.dart
 │   │   └── app_routes.dart
 │   ├── ui
 │   │   ├── theme.dart
 │   │   └── widgets
+│   │       ├── baseAppBar.dart
+│   │       ├── baseWebView.dart
+│   │       ├── custom_form_button.dart
+│   │       ├── custom_input_field.dart
 │   │       ├── menuItem.dart
 │   │       └── menuItemGroup.dart
 │   └── utils
 │       ├── dimens.dart
 │       ├── images.dart
-│       ├── intl.dart
-│       └── logger.dart
+│       ├── loading.dart
+│       ├── logger.dart
+│       └── showToast.dart
+├── generated
+│   └── locales.g.dart
 └── main.dart
 ```
 
@@ -106,42 +151,7 @@ dependencies:
   - `ui`: 用户界面相关
   - `utils`: 工具类
 
-## 常见问题
-- 如何添加新模块？
-  - 在`modules`目录下创建新文件夹，并按照现有模块的结构添加`bindings`、`controllers`和`views`。
-- 三级模块
-```
 
-lib/
-├── modules/
-│   ├── profile/
-│   │   ├── bindings/
-│   │   │   └── profile_binding.dart
-│   │   ├── controllers/
-│   │   │   └── profile_controller.dart
-│   │   ├── views/
-│   │   │   └── profile_view.dart
-│   │   ├── modules/
-│   │   │   ├── profile_xxx/
-│   │   │   │   ├── bindings/
-│   │   │   │   │   └── profile_xxx_binding.dart
-│   │   │   │   ├── controllers/
-│   │   │   │   │   └── profile_xxx_controller.dart
-│   │   │   │   ├── views/
-│   │   │   │   │   └── profile_xxx_view.dart
-│   │   │   ├── profile_yyy/
-│   │   │   │   ├── bindings/
-│   │   │   │   │   └── profile_yyy_binding.dart
-│   │   │   │   ├── controllers/
-│   │   │   │   │   └── profile_yyy_controller.dart
-│   │   │   │   ├── views/
-│   │   │   │   │   └── profile_yyy_view.dart
-这种结构的优点是：
-
-模块化清晰：每个模块都有自己的绑定、控制器和视图，便于维护和扩展。
-层次分明：子模块可以进一步细分，适用于复杂的业务逻辑。
-易于导航：通过目录结构，开发者可以快速找到相关文件。
-```
 
 ## 贡献
 欢迎提交PR或Issue。

@@ -1,9 +1,12 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:mark_jinxiaoman/app/data/global_state.dart';
 import 'package:mark_jinxiaoman/app/utils/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AppData {
   static SharedPreferences? prefs;
