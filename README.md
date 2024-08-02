@@ -90,7 +90,7 @@
 │       ├── loading.dart
 │       ├── logger.dart
 │       └── showToast.dart
-├── generated
+├── generated  // GetX cli 生成的国际化文件
 │   └── locales.g.dart
 └── main.dart
 ```

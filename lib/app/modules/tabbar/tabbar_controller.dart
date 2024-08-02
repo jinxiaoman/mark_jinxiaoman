@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:mark_jinxiaoman/app/data/app_data.dart';
+import 'package:mark_jinxiaoman/config/app_config.dart';
 
 class TabbarController extends GetxController {
   //TODO: Implement TabbarController

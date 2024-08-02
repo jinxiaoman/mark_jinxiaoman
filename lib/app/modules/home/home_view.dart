@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:mark_jinxiaoman/app/modules/home/home_controller.dart';
-import 'package:mark_jinxiaoman/app/ui/widgets/baseAppBar.dart';
+import 'package:mark_jinxiaoman/app/ui/widgets/base_app_bar.dart';
 import 'package:mark_jinxiaoman/generated/locales.g.dart';
 
 class HomeView extends GetView<HomeController> {

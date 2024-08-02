@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:mark_jinxiaoman/app/data/app_data.dart';
+import 'package:mark_jinxiaoman/config/app_config.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController

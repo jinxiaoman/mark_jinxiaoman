@@ -8,33 +8,36 @@ import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 
 import 'package:mark_jinxiaoman/app/bindings/global_binding.dart';
-import 'package:mark_jinxiaoman/app/data/app_data.dart';
-import 'package:mark_jinxiaoman/app/data/loading_service.dart';
-import 'package:mark_jinxiaoman/app/data/toast_service.dart';
 import 'package:mark_jinxiaoman/app/routes/app_pages.dart';
-import 'package:mark_jinxiaoman/app/ui/theme.dart';
+import 'package:mark_jinxiaoman/app/services/loading_service.dart';
+import 'package:mark_jinxiaoman/app/services/toast_service.dart';
+import 'package:mark_jinxiaoman/app/ui/theme/dark_theme.dart';
+import 'package:mark_jinxiaoman/app/ui/theme/light_theme.dart';
 import 'package:mark_jinxiaoman/app/utils/logger.dart';
+import 'package:mark_jinxiaoman/config/app_config.dart';
+import 'package:mark_jinxiaoman/config/env.dart';
 import 'package:mark_jinxiaoman/generated/locales.g.dart';
 
+// main.dart (updated)
+
 void main() async {
-  WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized(); // 确保Flutter框架初始化
-  GlobalBinding().dependencies(); // 绑定全局依赖
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding); // 保留启动屏
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  GlobalBinding().dependencies();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  await _initializeApp(); // 初始化应用
+  await _initializeApp();
 
-  FlutterNativeSplash.remove(); // 移除启动屏
+  FlutterNativeSplash.remove();
 }
 
 Future<void> _initializeApp() async {
-  await AppData.initData(); // 初始化数据
-  final locale = await AppData.getCurrentLocale(); // 获取当前语言
-  final themeMode = await AppData.getThemeMode(); // 获取当前主题模式
+  await AppConfig.init();
+  final locale = await AppConfig.getCurrentLocale();
+  final themeMode = AppConfig.getThemeMode();
 
-  await Future.delayed(Duration(seconds: 1)); // 模拟启动屏幕停留时间
+  await Future.delayed(Duration(seconds: 1));
 
-  runApp(MyApp(locale: locale, themeMode: themeMode)); // 运行应用
+  runApp(MyApp(locale: locale, themeMode: themeMode));
 }
 
 class MyApp extends StatelessWidget {
@@ -46,32 +49,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp, // 强制竖屏
+      DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
 
-    AppLogger.i("缓存中的国际化语言索引--,${locale}");
-    AppLogger.i("缓存中的themeMode--,${themeMode}");
+    AppLogger.i("缓存中的国际化语言索引--,$locale");
+    AppLogger.i("缓存中的themeMode--,$themeMode");
 
     return ScreenUtilInit(
-      designSize: Size(375, 690), // 填入设计稿中设备的屏幕尺寸，单位dp
+      designSize: Env.designSize,
       builder: (context, child) {
         return OKToast(
           child: GetMaterialApp(
             enableLog: true,
-            theme: CustomTheme.lightTheme,
-            darkTheme: CustomTheme.darkTheme,
+            theme: LightTheme.theme,
+            darkTheme: DarkTheme.theme,
             themeMode: themeMode,
             initialRoute: AppPages.INITIAL,
             getPages: AppPages.routes,
             translationsKeys: AppTranslation.translations,
-            locale: locale, // 当前的Locale
-            fallbackLocale: Locale('en', 'US'), // 备用Locale
-            supportedLocales: [
-              Locale('en', 'US'),
-              Locale('zh', 'CN'),
-              // 添加其他Locale
-            ],
+            locale: locale,
+            fallbackLocale: Env.fallbackLocale,
+            supportedLocales: Env.supportedLocales,
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,

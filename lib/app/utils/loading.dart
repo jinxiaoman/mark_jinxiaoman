@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'package:mark_jinxiaoman/app/data/loading_service.dart';
+import 'package:mark_jinxiaoman/app/services/loading_service.dart';
 
 class Loading {
   static void show([String? message]) {

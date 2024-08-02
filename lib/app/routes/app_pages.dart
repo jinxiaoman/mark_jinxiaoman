@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../middleware/auth_middleware.dart';
 import '../modules/about/about_binding.dart';
 import '../modules/about/about_view.dart';
 import '../modules/dynamic/dynamic_binding.dart';
@@ -41,11 +42,13 @@ class AppPages {
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.TABBAR,
       page: () => const TabbarView(),
       binding: TabbarBinding(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.LOGIN,

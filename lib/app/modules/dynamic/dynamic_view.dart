@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:mark_jinxiaoman/app/ui/widgets/baseAppBar.dart';
-import 'package:mark_jinxiaoman/app/ui/widgets/baseWebView.dart';
+import 'package:mark_jinxiaoman/app/ui/widgets/base_app_bar.dart';
+import 'package:mark_jinxiaoman/app/ui/widgets/base_web_view.dart';
 import 'package:mark_jinxiaoman/generated/locales.g.dart';
 
 import 'dynamic_controller.dart';
